@@ -2,12 +2,14 @@
 export function renderForm(rowData) {
   // create form element
   let formEl = document.createElement("form");
-
   /* get fieldset element */
   let fieldset = renderFieldset(rowData);
   // append to form
   formEl.append(fieldset);
-
+  /* get button element */
+  let button = renderButton(rowData);
+  // append to form
+  formEl.append(button);
   // return form element
   return formEl;
 }
@@ -20,4 +22,21 @@ export function renderFieldset(rowData) {
   fieldsetEl.setAttribute("id", `${rowData.name}Fieldset`);
   // return fieldset element
   return fieldsetEl;
+}
+
+// build button
+export function renderButton(rowData) {
+  // create button element
+  let buttonEl = document.createElement("button");
+  // add attributes for type, id
+  buttonEl.setAttribute("type", "submit");
+  buttonEl.setAttribute("id", `${rowData.name}LockBtn`);
+  // add lock emoji and aria-label
+  let lockEmoji = document.createTextNode("🔒");
+  buttonEl.appendChild(lockEmoji);
+  buttonEl.setAttribute("aria-label", `${rowData.label} Lock Button`);
+  // disable button
+  buttonEl.disabled = true;
+  // return button element
+  return buttonEl;
 }
