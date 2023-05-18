@@ -1,28 +1,24 @@
 /* imports */
 import formData from "./form-data.js";
+import { renderForm } from "./render-utils.js";
 
 /* DOM elements */
 const scoreRowsSection = document.getElementById("scoreRows");
 
 /* events */
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
   // function call to display 4 score rows
   doBuildScoreRows(4);
 });
 
 /* functions */
 function doBuildScoreRows(numOfRows) {
-  let data = formData;
-  console.log("data", data);
-
   for (let rowCount = 1; rowCount <= numOfRows; rowCount++) {
-    /* create a form */
-    const formEl = document.createElement("form");
-    // test text
-    formEl.textContent = "hello";
+    // get form for score row
+    let scoreRow = renderForm();
     // set attribute for id
-    formEl.setAttribute("id", data.name);
-    // append form (score row) to score rows container
-    scoreRowsSection.append(formEl);
+    scoreRow.setAttribute("id", `scoreRow${rowCount}`);
+    // append score row to score rows section
+    scoreRowsSection.append(scoreRow);
   }
 }
