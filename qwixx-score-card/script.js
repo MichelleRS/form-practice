@@ -15,7 +15,7 @@ window.addEventListener("load", async () => {
 function doBuildScoreRows(numOfRows) {
   for (let rowCount = 1; rowCount <= numOfRows; rowCount++) {
     // get form for score row
-    let scoreRow = renderForm();
+    let scoreRow = renderForm(formData[rowCount - 1]);
     // set attribute for id
     scoreRow.setAttribute("id", `scoreRow${rowCount}`);
     // append score row to score rows section
