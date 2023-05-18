@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
     <title>Qwixx Score Card</title>
   </head>
   <body>
@@ -12,84 +13,84 @@
       <h1>Qwixx Score Card</h1>
     </header>
     <main>
-      <!-- row one, TODO refactor as rendered form -->
-      <form id="rowOneForm">
-        <fieldset id="rowOneFieldset" style="background-color: #ffe9ec">
-          <legend>Row One Roll</legend>
-          <input type="checkbox" name="rowOne2" id="rowOne2" />
-          <label for="rowOne2">2</label>
-          <input type="checkbox" name="rowOne3" id="rowOne3" />
-          <label for="rowOne3">3</label>
-          <input type="checkbox" name="rowOne4" id="rowOne4" />
-          <label for="rowOne4">4</label>
-        </fieldset>
-        <button
-          type="button"
-          id="rowOneLockBtn"
-          aria-label="Row One Lock Button"
-          disabled
-        >
-          &#128274;
-        </button>
-      </form>
+      <!-- section: score rows -->
+      <section id="scoreRows">
+        <!-- row one, TODO refactor as rendered form -->
+        <form id="rowOneForm">
+          <fieldset id="rowOneFieldset" style="background-color: #ffe9ec">
+            <legend>Row One Roll</legend>
+            <!-- render inputs here -->
+          </fieldset>
+          <button
+            type="button"
+            id="rowOneLockBtn"
+            aria-label="Row One Lock Button"
+            disabled
+          >
+            &#128274;
+          </button>
+        </form>
 
-      <!-- row two -->
-      <form id="rowTwoForm">
-        <fieldset id="rowTwoFieldset" style="background-color: lightyellow">
-          <legend>Row Two Roll</legend>
-          <div id="rowTwoInputs">
+        <!-- row two -->
+        <form id="rowTwoForm">
+          <fieldset id="rowTwoFieldset" style="background-color: lightyellow">
+            <legend>Row Two Roll</legend>
+            <div id="rowTwoInputs">
+              <!-- render inputs here -->
+            </div>
+          </fieldset>
+          <button
+            type="button"
+            id="rowTwoLockBtn"
+            aria-label="Row Two Lock Button"
+            disabled
+          >
+            &#128274;
+          </button>
+        </form>
+
+        <!-- row three -->
+        <form id="rowThreeForm">
+          <fieldset id="rowThreeFieldset" style="background-color: #ccffcc">
+            <legend>Row Three Roll</legend>
+            <div id="rowThreeInputs">
+              <!-- render inputs here -->
+            </div>
+          </fieldset>
+          <button
+            type="button"
+            id="rowThreeLockBtn"
+            aria-label="Row Three Lock Button"
+            disabled
+          >
+            &#128274;
+          </button>
+        </form>
+
+        <!-- row four -->
+        <form id="rowFourForm">
+          <fieldset id="rowFourFieldset" style="background-color: #ccffff">
+            <legend>Row Four Roll</legend>
+          </fieldset>
+          <div id="rowFourInputs">
             <!-- render inputs here -->
           </div>
-        </fieldset>
-        <button
-          type="button"
-          id="rowTwoLockBtn"
-          aria-label="Row Two Lock Button"
-          disabled
-        >
-          &#128274;
-        </button>
-      </form>
+          <button
+            type="button"
+            id="rowFourLockBtn"
+            aria-label="Row Four Lock Button"
+            disabled
+          >
+            &#128274;
+          </button>
+        </form>
+      </section>
 
-      <!-- row three -->
-      <form id="rowThreeForm">
-        <fieldset id="rowThreeFieldset" style="background-color: #ccffcc">
-          <legend>Row Three Roll</legend>
-          <div id="rowThreeInputs">
-            <!-- render inputs here -->
-          </div>
-        </fieldset>
-        <button
-          type="button"
-          id="rowThreeLockBtn"
-          aria-label="Row Three Lock Button"
-          disabled
-        >
-          &#128274;
-        </button>
-      </form>
+      <!-- section: penalties -->
+      <section id="penalties"></section>
 
-      <!-- row four -->
-      <form id="rowFourForm">
-        <fieldset id="rowFourFieldset" style="background-color: #ccffff">
-          <legend>Row Four Roll</legend>
-        </fieldset>
-        <div id="rowFourInputs">
-          <!-- render inputs here -->
-        </div>
-        <button
-          type="button"
-          id="rowFourLockBtn"
-          aria-label="Row Four Lock Button"
-          disabled
-        >
-          &#128274;
-        </button>
-      </form>
-
-      <!-- penalties -->
-
-      <!-- totals -->
+      <!-- section: totals -->
+      <section id="totals"></section>
     </main>
     <footer></footer>
   </body>
