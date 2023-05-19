@@ -29,6 +29,17 @@ export function renderFieldset(rowData) {
   // append to fieldset
   fieldsetEl.append(legend);
 
+  /* get div */
+  // get checkbox count
+  let numOfCheckboxes = rowData.inputs;
+  // for each input in rowData
+  for (let numCount = 0; numCount < numOfCheckboxes; numCount++) {
+    // get div element
+    let div = renderCheckboxDiv();
+    // append div to fieldset
+    fieldsetEl.append(div);
+  }
+
   // return fieldset element
   return fieldsetEl;
 }
@@ -37,7 +48,6 @@ export function renderFieldset(rowData) {
 export function renderButton(rowData) {
   // create button element
   let buttonEl = document.createElement("button");
-
   // add attributes for type, id
   buttonEl.setAttribute("type", "submit");
   buttonEl.setAttribute("id", `${rowData.name}LockBtn`);
@@ -56,10 +66,20 @@ export function renderButton(rowData) {
 export function renderLegend(rowData) {
   // create legend element
   let legendEl = document.createElement("legend");
-
   // add text
   legendEl.appendChild(document.createTextNode(rowData.label));
 
   // return legend
   return legendEl;
+}
+
+// build div
+export function renderCheckboxDiv() {
+  // create div element
+  let divEl = document.createElement("div");
+  // set class attribute
+  divEl.classList.add("control");
+
+  // return div element
+  return divEl;
 }
