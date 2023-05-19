@@ -76,7 +76,7 @@ Digital score card for Qwixx game.
         </div>
         <!-- insert 9 more div.controls -->
     </fieldset>
-    <button type="button">&#128274;</button>
+    <button type="submit" id="rowOneLockBtn" aria-label="Row One Lock Button" disabled>&#128274;</button>
 </form>
 ```
 
@@ -85,16 +85,28 @@ Digital score card for Qwixx game.
 ### Slice 1: Row Components
 
 - [x] initial form planning in html
+
 - [x] create form data as an array of objects
-- [] render form elements for each score row
-- [] events for each form:
 
-  - [] disable checkbox numbers based on numbers selected
-  - [] enable lock button when 5 or more inputs in form row have been checked:
-    - [] on click should disable the number inputs in that row
+- [x] render form elements for each score row
 
-### Slice 2: Add Total + Track State
+  - [x] begin doBuildScoreRows(), which makes a call to render form elements
+  - [x] add event listener on page load that makes a call to doBuildScoreRows() and passes in number of rows
+  - [x] build form container and render
+  - [x] build fieldset, append to form
+  - [x] build button, append to form
+  - [x] build legend, append to fieldset
+  - [x] build div containers for checkboxes, append to fieldset
+  - [x] build checkbox inputs and labels, append to div
 
-### Slice 3: Penalty
+### Slice 2: Events for Score Row
 
-### Slice 4: End Game Total
+- [] disable checkbox numbers based on numbers selected
+- [] enable lock button when 5 or more inputs in form row have been checked
+  - [] on click should disable the number inputs in that row
+
+### Slice 3: Add Total + Track State
+
+### Slice 4: Penalties
+
+### Slice 5: End Game Total
