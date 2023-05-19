@@ -39,8 +39,10 @@ export function renderFieldset(rowData) {
   for (let numCount = 0; numCount < numOfCheckboxes; numCount++) {
     // get div element
     let div = renderCheckboxDiv();
+    // get array of checkbox number values for labels and inputs
+    let boxNumsArray = rowData.boxNums;
     // get label
-    let label = renderCheckboxLabel(rowData);
+    let label = renderCheckboxLabel(rowData, boxNumsArray[numCount]);
     // get input
     let input = renderCheckboxInput(rowData);
     // append label and input to div
@@ -94,13 +96,13 @@ export function renderCheckboxDiv() {
 }
 
 // build label
-export function renderCheckboxLabel(rowData) {
+export function renderCheckboxLabel(rowData, boxNum) {
   // create label element
   let labelEl = document.createElement("label");
   // set for attribute, ex: rowOneBox1
   labelEl.setAttribute("for", `${rowData.name}Box${rowData.id}`);
-  // TODO append text
-  labelEl.appendChild(document.createTextNode("test"));
+  // append box number value
+  labelEl.append(document.createTextNode(boxNum));
 
   // return label element
   return labelEl;
