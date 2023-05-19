@@ -1,3 +1,6 @@
+// labelEl.appendChild(document.createTextNode(`${rowData.boxNums}`));
+// begin building label and input elements
+
 // build form
 export function renderForm(rowData) {
   // create form element
@@ -36,6 +39,12 @@ export function renderFieldset(rowData) {
   for (let numCount = 0; numCount < numOfCheckboxes; numCount++) {
     // get div element
     let div = renderCheckboxDiv();
+    // get label
+    let label = renderCheckboxLabel(rowData);
+    // get input
+    let input = renderCheckboxInput(rowData);
+    // append label and input to div
+    div.append(label, input);
     // append div to fieldset
     fieldsetEl.append(div);
   }
@@ -82,4 +91,29 @@ export function renderCheckboxDiv() {
 
   // return div element
   return divEl;
+}
+
+// build label
+export function renderCheckboxLabel(rowData) {
+  // create label element
+  let labelEl = document.createElement("label");
+  // set for attribute, ex: rowOneBox1
+  labelEl.setAttribute("for", `${rowData.name}Box${rowData.id}`);
+  // TODO append text
+  labelEl.appendChild(document.createTextNode("test"));
+
+  // return label element
+  return labelEl;
+}
+
+// build input
+export function renderCheckboxInput(rowData) {
+  // create input element
+  let inputEl = document.createElement("input");
+  // set type attribute to checkbox
+  inputEl.setAttribute("type", "checkbox");
+  // TODO set name and id attribute , ex: rowOneBox1
+
+  // return input element
+  return inputEl;
 }
