@@ -1,17 +1,14 @@
-// labelEl.appendChild(document.createTextNode(`${rowData.boxNums}`));
-// begin building label and input elements
-
 // build form
 export function renderForm(rowData) {
   // create form element
   let formEl = document.createElement("form");
 
-  /* get fieldset element */
+  // get fieldset element
   let fieldset = renderFieldset(rowData);
   // append to form
   formEl.append(fieldset);
 
-  /* get button element */
+  // get button element
   let button = renderButton(rowData);
   // append to form
   formEl.append(button);
@@ -27,15 +24,15 @@ export function renderFieldset(rowData) {
   // set attribute for id
   fieldsetEl.setAttribute("id", `${rowData.name}Fieldset`);
 
-  /* get legend */
+  // get legend
   let legend = renderLegend(rowData);
   // append to fieldset
   fieldsetEl.append(legend);
 
-  /* get div */
+  // get div
   // get checkbox count
   let numOfCheckboxes = rowData.inputs;
-  // for each input in rowData
+  // for each checkbox in total count
   for (let numCount = 0; numCount < numOfCheckboxes; numCount++) {
     // get div element
     let div = renderCheckboxDiv();
@@ -55,24 +52,6 @@ export function renderFieldset(rowData) {
   return fieldsetEl;
 }
 
-// build button
-export function renderButton(rowData) {
-  // create button element
-  let buttonEl = document.createElement("button");
-  // add attributes for type, id
-  buttonEl.setAttribute("type", "submit");
-  buttonEl.setAttribute("id", `${rowData.name}LockBtn`);
-  // add lock emoji and aria-label
-  let lockEmoji = document.createTextNode("🔒");
-  buttonEl.appendChild(lockEmoji);
-  buttonEl.setAttribute("aria-label", `${rowData.label} Lock Button`);
-  // disable button
-  buttonEl.disabled = true;
-
-  // return button element
-  return buttonEl;
-}
-
 // build legend
 export function renderLegend(rowData) {
   // create legend element
@@ -80,7 +59,7 @@ export function renderLegend(rowData) {
   // add text
   legendEl.appendChild(document.createTextNode(rowData.label));
 
-  // return legend
+  // return legend element
   return legendEl;
 }
 
@@ -120,4 +99,22 @@ export function renderCheckboxInput(rowData, boxNum) {
 
   // return input element
   return inputEl;
+}
+
+// build button
+export function renderButton(rowData) {
+  // create button element
+  let buttonEl = document.createElement("button");
+  // add attributes for type, id
+  buttonEl.setAttribute("type", "submit");
+  buttonEl.setAttribute("id", `${rowData.name}LockBtn`);
+  // add lock emoji and aria-label
+  let lockEmoji = document.createTextNode("🔒");
+  buttonEl.appendChild(lockEmoji);
+  buttonEl.setAttribute("aria-label", `${rowData.label} Lock Button`);
+  // disable button
+  buttonEl.disabled = true;
+
+  // return button element
+  return buttonEl;
 }

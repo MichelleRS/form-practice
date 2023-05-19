@@ -2,9 +2,6 @@
 import formData from "./form-data.js";
 import { renderForm } from "./render-utils.js";
 
-/* DOM elements */
-const scoreRowsSection = document.getElementById("scoreRows");
-
 /* events */
 window.addEventListener("load", async () => {
   // function call to display 4 score rows
@@ -13,6 +10,10 @@ window.addEventListener("load", async () => {
 
 /* functions */
 function doBuildScoreRows(numOfRows) {
+  // get score rows section
+  const scoreRowsSection = document.getElementById("scoreRows");
+
+  // loop through the number of rows
   for (let rowCount = 1; rowCount <= numOfRows; rowCount++) {
     // get form for score row
     let scoreRow = renderForm(formData[rowCount - 1]);
