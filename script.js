@@ -29,17 +29,20 @@ function doBuildScoreRows(numOfRows) {
   }
 }
 
-// TEST IN PROGRESS listen for changes in score rows
+// IN PROGRESS listen for changes in score rows
 function doListenForScoreRowChanges() {
-  // get score row one
-  const scoreRowOne = document.getElementById("scoreRow1");
-  // listen for changes to score row one
-  scoreRowOne.addEventListener("change", () => {
-    console.log("There was a change to row one!!");
+  // get score rows
+  const scoreRows = document.getElementsByClassName("scoreRow");
 
-    // count how many checkboxes have been selected
-    doCount();
-  });
+  // loop through score rows
+  for (let index = 0; index < scoreRows.length; index++) {
+    // listen for change to each row
+    scoreRows[index].addEventListener("change", () => {
+      console.log("change to this row:", scoreRows[index]);
+      // TODO count how many checkboxes have been selected
+      // doCount();
+    });
+  }
 }
 
 // enable lock button if 5 or more checkboxes in a row have been selected
