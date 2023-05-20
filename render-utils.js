@@ -96,6 +96,8 @@ export function renderCheckboxInput(rowData, boxNum) {
   // set name and id attributes, ex: rowOneBox1
   inputEl.setAttribute("name", `${rowData.name}Box${boxNum}`);
   inputEl.setAttribute("id", `${rowData.name}Box${boxNum}`);
+  // set class attribute
+  inputEl.classList.add(`${rowData.name}Box`);
 
   // return input element
   return inputEl;
