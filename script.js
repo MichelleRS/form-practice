@@ -22,21 +22,43 @@ function doBuildScoreRows(numOfRows) {
     let scoreRow = renderForm(formData[rowCount - 1]);
     // set attribute for id
     scoreRow.setAttribute("id", `scoreRow${rowCount}`);
+    // add class attribute
+    scoreRow.classList.add("scoreRow");
     // append score row to score rows section
     scoreRowsSection.append(scoreRow);
   }
 }
 
-// IN PROGRESS listen for changes in score rows
+// TEST IN PROGRESS listen for changes in score rows
 function doListenForScoreRowChanges() {
-  // initialize variable for section with scoreRows id
-  const scoreRowsSection = document.getElementById("scoreRows");
+  // get score row one
+  const scoreRowOne = document.getElementById("scoreRow1");
+  // listen for changes to score row one
+  scoreRowOne.addEventListener("change", () => {
+    console.log("There was a change to row one!!");
 
-  // listen for changes in the section
-  scoreRowsSection.addEventListener("change", () => {
-    console.log("There was a change to a row!!");
+    // count how many checkboxes have been selected
+    doCount();
+
+    // if 5 or more have been selected, function call to doEnableLockButton()
+
+    // else do nothing
   });
 }
 
 // TODO enable lock button if 5 or more checkboxes in a row have been selected
 function doEnableLockButton() {}
+
+// count checkbox checks
+function doCount() {
+  let checkboxes = document.getElementsByClassName("rowOneBox");
+  let count = 0;
+
+  for (let index = 0; index < checkboxes.length; index++) {
+    if (checkboxes[index].checked === true) {
+      console.log("checked:", checkboxes[index]);
+      count++;
+      console.log("count", count);
+    }
+  }
+}
