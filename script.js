@@ -39,8 +39,9 @@ function doListenForScoreRowChanges() {
     // listen for change to each row
     scoreRows[index].addEventListener("change", () => {
       console.log("change to this row:", scoreRows[index]);
-      // TODO count how many checkboxes have been selected
-      // doCount();
+      // count how many checkboxes have been selected
+      doCount(formData[index]);
+      console.log("form data row:", formData[index]);
     });
   }
 }
@@ -62,13 +63,17 @@ function doDisableLockButton() {
 }
 
 // count checkbox checks
-function doCount() {
-  let checkboxes = document.getElementsByClassName("rowOneBox");
+// doCountAndLockBtn
+function doCount(row) {
+  // get checkboxes by id
+  let checkboxes = document.getElementsByClassName(`${row.name}Box`);
+  // initailize checkbox count at 0
   let count = 0;
 
+  // loop through checkboxes in row
   for (let index = 0; index < checkboxes.length; index++) {
+    // if checkbox is checked, add to count
     if (checkboxes[index].checked === true) {
-      console.log("checked:", checkboxes[index]);
       count++;
       console.log("count", count);
     }
