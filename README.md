@@ -101,9 +101,9 @@ Digital score card for Qwixx game.
 
 ### Slice 2: Events for Score Row
 
+- [x] enable/disable lock button based on checkbox count
+  - [] on click, disable inputs in that row
 - [] disable checkbox numbers based on numbers selected
-- [] enable lock button when 5 or more inputs in form row have been checked
-  - [] on click should disable the number inputs in that row
 
 ### Slice 3: Add Total + Track State
 
