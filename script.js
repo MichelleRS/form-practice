@@ -47,19 +47,20 @@ function doListenForScoreRowChanges() {
 }
 
 // enable lock button if 5 or more checkboxes in a row have been selected
-function doEnableLockButton() {
+function doEnableLockButton(row) {
   // get button
-  let rowOneBtn = document.getElementById("rowOneLockBtn");
+  // let rowOneBtn = document.getElementById("rowOneLockBtn");
+  let lockButton = document.getElementById(`${row.name}LockBtn`);
   // enable lock button by row id
-  rowOneBtn.disabled = false;
+  lockButton.disabled = false;
 }
 
 // disable lock button if less than 5 checkboxes in a row have been selected
-function doDisableLockButton() {
+function doDisableLockButton(row) {
   // get button
-  let rowOneBtn = document.getElementById("rowOneLockBtn");
+  let lockButton = document.getElementById(`${row.name}LockBtn`);
   // enable lock button by row id
-  rowOneBtn.disabled = true;
+  lockButton.disabled = true;
 }
 
 // count checkbox checks
@@ -82,11 +83,11 @@ function doCount(row) {
   // if checkbox count is 5 or more, make call to doEnableLockButton()
   if (count >= 5) {
     console.log("5 or more");
-    doEnableLockButton();
+    doEnableLockButton(row);
   }
   // if checkbox count is below 5, make call to doDisableLockButton()
   if (count < 5) {
-    doDisableLockButton();
+    doDisableLockButton(row);
   } else {
     console.log("less than 5");
   }
