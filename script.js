@@ -56,7 +56,10 @@ function doEnableLockButton(row) {
     e.preventDefault();
     // function call to lock row
     doLockRow(row);
-    // TODO alert user that row is locked and how to unlock (show unlock button?)
+    // notify user that row is locked
+    doLockNotification(row);
+    // reveal unlock button
+    doRevealUnlockButton(row);
   });
 }
 
@@ -97,4 +100,34 @@ function doLockRow(row) {
   let fieldset = document.getElementById(`${row.name}Fieldset`);
   // disable fieldset
   fieldset.disabled = true;
+}
+
+// enable unlock button
+function doRevealUnlockButton(row) {
+  // get unlock button by id
+  let unlockButton = document.getElementById(`${row.name}UnlockBtn`);
+  // reveal unlock button
+  unlockButton.hidden = false;
+  // unlock row on button click
+  unlockButton.addEventListener("click", () => {
+    // function call to unlock row
+    doUnlockRow(row);
+  });
+}
+
+// notify user that row is locked
+// TODO research notifications and accessibility best practices
+function doLockNotification(row) {
+  // get legend
+  let legend = document.getElementById(`${row.name}Legend`);
+  // update legend to notify user that row is locked
+  legend.innerHTML = `${row.label} is Locked`;
+}
+
+// unlock row
+function doUnlockRow(row) {
+  // get fieldset
+  let fieldset = document.getElementById(`${row.name}Fieldset`);
+  // enable fieldset
+  fieldset.disabled = false;
 }

@@ -56,6 +56,8 @@ export function renderFieldset(rowData) {
 export function renderLegend(rowData) {
   // create legend element
   let legendEl = document.createElement("legend");
+  // set id attribute
+  legendEl.setAttribute("id", `${rowData.name}Legend`);
   // add text
   legendEl.appendChild(document.createTextNode(rowData.label));
 
