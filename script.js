@@ -50,6 +50,14 @@ function doEnableLockButton(row) {
   let lockButton = document.getElementById(`${row.name}LockBtn`);
   // enable lock button
   lockButton.disabled = false;
+  // lock row on button click
+  lockButton.addEventListener("click", (e) => {
+    // prevent form from submitting
+    e.preventDefault();
+    // function call to lock row
+    doLockRow(row);
+    // TODO alert user that row is locked and how to unlock (show unlock button?)
+  });
 }
 
 // disable lock button if less than 5 checkboxes selected
@@ -81,4 +89,12 @@ function doCountAndBtn(row) {
   if (count < 5) {
     doDisableLockButton(row);
   }
+}
+
+// lock row
+function doLockRow(row) {
+  // get fieldset
+  let fieldset = document.getElementById(`${row.name}Fieldset`);
+  // disable fieldset
+  fieldset.disabled = true;
 }
