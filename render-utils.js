@@ -3,15 +3,15 @@ export function renderForm(rowData) {
   // create form element
   let formEl = document.createElement("form");
 
+  /* get form elements */
   // get fieldset element
   let fieldset = renderFieldset(rowData);
-  // append to form
-  formEl.append(fieldset);
-
-  // get button element
-  let button = renderButton(rowData);
-  // append to form
-  formEl.append(button);
+  // get lock button element
+  let lockButton = renderLockButton(rowData);
+  // get unlock button element
+  let unlockButton = renderUnlockButton(rowData);
+  // append elements to form
+  formEl.append(fieldset, lockButton, unlockButton);
 
   // return form element
   return formEl;
@@ -103,8 +103,8 @@ export function renderCheckboxInput(rowData, boxNum) {
   return inputEl;
 }
 
-// build button
-export function renderButton(rowData) {
+// build lock button
+export function renderLockButton(rowData) {
   // create button element
   let buttonEl = document.createElement("button");
   // add attributes for type, id
@@ -117,6 +117,21 @@ export function renderButton(rowData) {
   // disable button
   buttonEl.disabled = true;
 
+  // return button element
+  return buttonEl;
+}
+
+// build unlock button
+export function renderUnlockButton(rowData) {
+  // create button element
+  let buttonEl = document.createElement("button");
+  // add attribute for type (button) and id
+  buttonEl.setAttribute("type", "button");
+  buttonEl.setAttribute("id", `${rowData.name}UnlockBtn`);
+  // add text
+  buttonEl.textContent = "Unlock Row";
+  // hide button
+  buttonEl.hidden = true;
   // return button element
   return buttonEl;
 }
