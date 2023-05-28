@@ -31,17 +31,43 @@ function doBuildScoreRows(numOfRows) {
 
 // listen for changes in score rows
 function doListenForScoreRowChanges() {
-  // get score rows
+  // initialize variable to get score rows (form)
   const scoreRows = document.getElementsByClassName("scoreRow");
 
   // loop through score rows
   for (let index = 0; index < scoreRows.length; index++) {
+    // initialize variable for each row
+    let row = formData[index];
+    // get checkboxes by class name (ex: rowOneBox)
+    let checkboxes = document.getElementsByClassName(`${row.name}Box`);
     // listen for change to each row
     scoreRows[index].addEventListener("change", () => {
-      // enable/disable lock button based on checkbox count
-      doCountAndBtn(formData[index]);
+      // initialize a variable to count checks in row
+      let count = doCheckedCount(checkboxes);
+      // if checkbox count in row is 5 or more, make call to doEnableLockButton()
+      if (count >= 5) {
+        doEnableLockButton(row);
+      }
+      // if checkbox count in row is below 5, make call to doDisableLockButton()
+      if (count < 5) {
+        doDisableLockButton(row);
+      }
     });
   }
+}
+
+// tally checks and return
+function doCheckedCount(checkboxes) {
+  // initialize checkbox count at 0
+  let count = 0;
+  // loop through checkboxes in row
+  for (let index = 0; index < checkboxes.length; index++) {
+    // if checkbox is checked, add to count
+    if (checkboxes[index].checked === true) {
+      count++;
+    }
+  }
+  return count;
 }
 
 // enable lock button if 5 or more checkboxes selected
@@ -69,29 +95,6 @@ function doDisableLockButton(row) {
   let lockButton = document.getElementById(`${row.name}LockBtn`);
   // disable lock button
   lockButton.disabled = true;
-}
-
-// count checkbox checks
-function doCountAndBtn(row) {
-  // get checkboxes by id
-  let checkboxes = document.getElementsByClassName(`${row.name}Box`);
-  // initialize checkbox count at 0
-  let count = 0;
-  // loop through checkboxes in row
-  for (let index = 0; index < checkboxes.length; index++) {
-    // if checkbox is checked, add to count
-    if (checkboxes[index].checked === true) {
-      count++;
-    }
-  }
-  // if checkbox count is 5 or more, make call to doEnableLockButton()
-  if (count >= 5) {
-    doEnableLockButton(row);
-  }
-  // if checkbox count is below 5, make call to doDisableLockButton()
-  if (count < 5) {
-    doDisableLockButton(row);
-  }
 }
 
 // lock row
