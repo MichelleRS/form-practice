@@ -44,10 +44,8 @@ function doListenForScoreRowChanges() {
     scoreRows[index].addEventListener("change", () => {
       // initialize a variable to count checks in row
       let count = doCheckedCount(checkboxes);
-      // condition: is count greater than or equal to 5?
-      // if truthy, make call to doEnableLockButton
-      // if falsy, make call to doDisableLockButton
-      count >= 5 ? doEnableLockButton(row) : doDisableLockButton(row);
+      // function call to handle lock button
+      doHandleLockButton(row, count);
     });
   }
 }
@@ -66,16 +64,23 @@ function doCheckedCount(checkboxes) {
   return count;
 }
 
-// enable lock button if 5 or more checkboxes selected
-function doEnableLockButton(row) {
-  // get button
+// handle lock button
+function doHandleLockButton(row, count) {
+  //  get button
   let lockButton = document.getElementById(`${row.name}LockBtn`);
-  // enable lock button
-  lockButton.disabled = false;
+
+  // condition: is checkbox count greater than or equal to 5?
+  // if truthy, enable lock button
+  // if falsy, disable lock button
+  count >= 5 ? (lockButton.disabled = false) : (lockButton.disabled = true);
+
   // lock row on button click
   lockButton.addEventListener("click", (e) => {
     // prevent form from submitting
     e.preventDefault();
+    if (lockButton.getAttribute("aria-pressed" == "false")) {
+      console.log("aria-pressed is false");
+    }
     // function call to lock row
     doLockRow(row);
     // notify user that row is locked
@@ -83,14 +88,6 @@ function doEnableLockButton(row) {
     // reveal unlock button
     doRevealUnlockButton(row);
   });
-}
-
-// disable lock button if less than 5 checkboxes selected
-function doDisableLockButton(row) {
-  // get button
-  let lockButton = document.getElementById(`${row.name}LockBtn`);
-  // disable lock button
-  lockButton.disabled = true;
 }
 
 // lock row
