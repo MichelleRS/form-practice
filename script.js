@@ -105,5 +105,7 @@ function doHandleUnlockButton(row, legend, fieldset) {
     fieldset.disabled = false;
     // remove locked text from legend
     legend.innerHTML = `${row.label}`;
+    // remove unlock button
+    unlockButton.hidden = true;
   });
 }
