@@ -44,14 +44,10 @@ function doListenForScoreRowChanges() {
     scoreRows[index].addEventListener("change", () => {
       // initialize a variable to count checks in row
       let count = doCheckedCount(checkboxes);
-      // if checkbox count in row is 5 or more, make call to doEnableLockButton()
-      if (count >= 5) {
-        doEnableLockButton(row);
-      }
-      // if checkbox count in row is below 5, make call to doDisableLockButton()
-      if (count < 5) {
-        doDisableLockButton(row);
-      }
+      // condition: is count greater than or equal to 5?
+      // if truthy, make call to doEnableLockButton
+      // if falsy, make call to doDisableLockButton
+      count >= 5 ? doEnableLockButton(row) : doDisableLockButton(row);
     });
   }
 }
