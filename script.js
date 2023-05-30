@@ -66,8 +66,13 @@ function doCheckedCount(checkboxes) {
 
 // handle lock button
 function doHandleLockButton(row, count) {
+  /* get DOM elements to pass to functions */
   //  get button
   let lockButton = document.getElementById(`${row.name}LockBtn`);
+  // get legend for user notification
+  let legend = document.getElementById(`${row.name}Legend`);
+  // get fieldset to enable/disable checkboxes
+  let fieldset = document.getElementById(`${row.name}Fieldset`);
 
   // condition: is checkbox count greater than or equal to 5?
   // if truthy, enable lock button
@@ -78,52 +83,27 @@ function doHandleLockButton(row, count) {
   lockButton.addEventListener("click", (e) => {
     // prevent form from submitting
     e.preventDefault();
-    if (lockButton.getAttribute("aria-pressed" == "false")) {
-      console.log("aria-pressed is false");
-    }
-    // function call to lock row
-    doLockRow(row);
-    // notify user that row is locked
-    doLockNotification(row);
-    // reveal unlock button
-    doRevealUnlockButton(row);
+    // lock row
+    fieldset.disabled = true;
+    // update legend to notify user that row is locked
+    // TODO research notifications and accessibility best practices
+    legend.innerHTML = `${row.label} is Locked`;
+    // function call to handle unlock button
+    doHandleUnlockButton(row, legend, fieldset);
   });
 }
 
-// lock row
-function doLockRow(row) {
-  // get fieldset
-  let fieldset = document.getElementById(`${row.name}Fieldset`);
-  // disable fieldset
-  fieldset.disabled = true;
-}
-
 // enable unlock button
-function doRevealUnlockButton(row) {
+function doHandleUnlockButton(row, legend, fieldset) {
   // get unlock button by id
   let unlockButton = document.getElementById(`${row.name}UnlockBtn`);
   // reveal unlock button
   unlockButton.hidden = false;
   // unlock row on button click
   unlockButton.addEventListener("click", () => {
-    // function call to unlock row
-    doUnlockRow(row);
+    // enable fieldset to unlock row
+    fieldset.disabled = false;
+    // remove locked text from legend
+    legend.innerHTML = `${row.label}`;
   });
-}
-
-// notify user that row is locked
-// TODO research notifications and accessibility best practices
-function doLockNotification(row) {
-  // get legend
-  let legend = document.getElementById(`${row.name}Legend`);
-  // update legend to notify user that row is locked
-  legend.innerHTML = `${row.label} is Locked`;
-}
-
-// unlock row
-function doUnlockRow(row) {
-  // get fieldset
-  let fieldset = document.getElementById(`${row.name}Fieldset`);
-  // enable fieldset
-  fieldset.disabled = false;
 }
