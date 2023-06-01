@@ -40,12 +40,15 @@ function doListenForScoreRowChanges() {
     let row = formData[index];
     // get checkboxes by class name (ex: rowOneBox)
     let checkboxes = document.getElementsByClassName(`${row.name}Box`);
+    console.log("checkboxes", checkboxes);
     // listen for change to each row
     scoreRows[index].addEventListener("change", () => {
       // initialize a variable to count checks in row
       let count = doCheckedCount(checkboxes);
       // function call to handle lock button
       doHandleLockButton(row, count);
+      // TODO function call to handle disabling checkboxes to left of click
+      doHandleCheckboxClick(checkboxes);
     });
   }
 }
@@ -108,4 +111,51 @@ function doHandleUnlockButton(row, legend, fieldset) {
     // remove unlock button
     unlockButton.hidden = true;
   });
+}
+
+// disable checkboxes to left of selected checkbox
+// FIX? if a checkbox is deselected, can no longer select numbers less than it
+function doHandleCheckboxClick(checkboxes) {
+  // function calls to set min and max checked checkbox index
+  let minCheckedCheckboxIndex = getMinCheckedCheckboxIndex(checkboxes);
+  let maxCheckedCheckboxIndex = getMaxCheckedCheckboxIndex(checkboxes);
+  // loop through checkboxes less than minCheckedCheckboxIndex
+  for (let index = 0; index < minCheckedCheckboxIndex; index++) {
+    // disable checkboxes with indexes less than minCheckedCheckboxIndex
+    checkboxes[index].disabled = true;
+  }
+  // loop through checkboxes less than maxCheckedCheckboxIndex
+  for (let index = 0; index < maxCheckedCheckboxIndex; index++) {
+    if (checkboxes[index].checked === false) {
+      // disable unchecked checkboxes with indexes less than maxCheckedCheckboxIndex
+      checkboxes[index].disabled = true;
+    }
+  }
+}
+
+// get min checked checkbox index
+function getMinCheckedCheckboxIndex(checkboxes) {
+  let minCheckedCheckboxIndex = null;
+  // loop through checkboxes in row
+  for (let index = 0; index < checkboxes.length; index++) {
+    if (checkboxes[index].checked === true) {
+      // set checked checkbox to index
+      minCheckedCheckboxIndex = index;
+      break;
+    }
+  }
+  return minCheckedCheckboxIndex;
+}
+
+// get max checked checkbox index
+function getMaxCheckedCheckboxIndex(checkboxes) {
+  let maxCheckedCheckboxIndex = null;
+  // loop through checkboxes in row
+  for (let index = 0; index < checkboxes.length; index++) {
+    if (checkboxes[index].checked === true) {
+      // set checked checkbox to index
+      maxCheckedCheckboxIndex = index;
+    }
+  }
+  return maxCheckedCheckboxIndex;
 }
