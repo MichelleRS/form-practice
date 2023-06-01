@@ -113,16 +113,13 @@ function doHandleUnlockButton(row, legend, fieldset) {
   });
 }
 
-// TODO disable checkboxes to left of selected checkbox
+// disable checkboxes to left of selected checkbox
+// FIX? if a checkbox is deselected, can no longer select numbers less than it
 function doHandleCheckboxClick(checkboxes) {
   // function calls to set min and max checked checkbox index
   let minCheckedCheckboxIndex = getMinCheckedCheckboxIndex(checkboxes);
   let maxCheckedCheckboxIndex = getMaxCheckedCheckboxIndex(checkboxes);
-
-  console.log("minCheckedCheckboxIndex", minCheckedCheckboxIndex);
-  console.log("maxCheckedCheckboxIndex", maxCheckedCheckboxIndex);
   // loop through checkboxes less than minCheckedCheckboxIndex
-  // FIX if minCheckedCheckboxIndex is deselected, can no longer select numbers less than it
   for (let index = 0; index < minCheckedCheckboxIndex; index++) {
     // disable checkboxes with indexes less than minCheckedCheckboxIndex
     checkboxes[index].disabled = true;
