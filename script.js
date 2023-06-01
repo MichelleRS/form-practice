@@ -121,11 +121,18 @@ function doHandleCheckboxClick(checkboxes) {
 
   console.log("minCheckedCheckboxIndex", minCheckedCheckboxIndex);
   console.log("maxCheckedCheckboxIndex", maxCheckedCheckboxIndex);
-  // TODO loop through checkboxes to check for index values less than checked checkbox index
+  // loop through checkboxes less than minCheckedCheckboxIndex
   // FIX if minCheckedCheckboxIndex is deselected, can no longer select numbers less than it
   for (let index = 0; index < minCheckedCheckboxIndex; index++) {
     // disable checkboxes with indexes less than minCheckedCheckboxIndex
     checkboxes[index].disabled = true;
+  }
+  // loop through checkboxes less than maxCheckedCheckboxIndex
+  for (let index = 0; index < maxCheckedCheckboxIndex; index++) {
+    if (checkboxes[index].checked === false) {
+      // disable unchecked checkboxes with indexes less than maxCheckedCheckboxIndex
+      checkboxes[index].disabled = true;
+    }
   }
 }
 
