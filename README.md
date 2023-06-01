@@ -1,60 +1,51 @@
 # Qwixx Score Card
 
-## MVP Goal
-
 Digital score card for Qwixx game.
 
 ## Project Status
 
-- _MVP in progress_
+- Working on [Slice 3](#slice-3-add-total--track-state).
 
 ## Components
 
 ### 1-4. Score Rows
 
-- rowOne, rowTwo, rowThree, rowFour
-
 - Each score row is a form with:
-
   - checkbox inputs for numbers 2-12
-  - lockForm button (type="button")
-    - user can only press if 5 or more numbers from row are selected
-
-- Events for each score row:
-  - when checked, add to row total
-  - disable checkbox numbers based on numbers selected
-    - Example: If 6 is selected in rowOne, user cannot select checkbox numbers less than or equal to 5
-  - lockForm button click should disable the number inputs in that row
+  - lock button (type="submit")
+    - disable on page load
+    - enable when user checks 5+ checkboxes in row
+    - on click: (1) disables checkboxes in row, (2) notifies user row is locked, (3) renders an unlock button
+  - unlock button (type="button")
+    - on click: (1) enable checkboxes in row, (2) remove row lock notification, (3) hide unlock button
 
 ### 5. Penalties
 
-- 4 checkboxes to track penalty tallies
+- 4 checkbox inputs to track penalty tallies
   - with each tally, add -5 to penaltyTotal
 
 ### 6. Totals
 
-- rowOneTotal, rowTwoTotal, rowThreeTotal, rowFourTotal:
-  - show active totals for each row
+- show active totals for each row
 - penaltyTotal (tally \* 5):
   - show penalties total (negative number)
+- show current game total (row totals - penaltyTotal)
 
-### 7. End Game Button
+### 7. End Game
 
-- enabled when:
-  - penaltyTotal equals -20
-  - 2 or more rows have been locked
-- on click show final score:
-  - add row totals and subtract penaltyTotal
+- game ends when: (1) penaltyTotal equals -20, or (2) two rows have been locked
 
 ## DOM Tree Planning
+
+### Main
 
 ```
 <main>
     <section#scoreRows>
-        <form#rowOne/>
-        <form#rowTwo/>
-        <form#rowThree/>
-        <form#rowFour/>
+        <form#scoreRow1.scoreRow/>
+        <form#scoreRow2.scoreRow/>
+        <form#scoreRow3.scoreRow/>
+        <form#scoreRow4.scoreRow/>
     </section>
     <section#penalties/>
     <section#totals/>
@@ -62,21 +53,24 @@ Digital score card for Qwixx game.
 </main>
 ```
 
+### Section: Score Rows
+
 ```
-<form#rowOne>
+<form#scoreRow1.scoreRow>
     <fieldset#rowOneFieldset>
-        <legend>Row One</legend>
-        <div.control>
-            <label for="rowOneBox1">1</label>
-            <input type="checkbox" name="rowOneBox1" id="rowOneBox1"/>
-        </div>
+        <legend#rowOneLegend>Row One</legend>
         <div.control>
             <label for="rowOneBox2">2</label>
-            <input type="checkbox" name="rowOneBox2" id="rowOneBox2"/>
+            <input type="checkbox" name="rowOneBox2" id="rowOneBox2" value="2" class="rowOneBox/>
+        </div>
+        <div.control>
+            <label for="rowOneBox3">3</label>
+            <input type="checkbox" name="rowOneBox3" id="rowOneBox3"/>
         </div>
         <!-- insert 9 more div.controls -->
     </fieldset>
     <button type="submit" id="rowOneLockBtn" aria-label="Row One Lock Button" disabled>&#128274;</button>
+    <button type="button" id="rowOneUnlockBtn">Unlock Row</button>
 </form>
 ```
 
@@ -85,11 +79,8 @@ Digital score card for Qwixx game.
 ### Slice 1: Row Components
 
 - [x] initial form planning in html
-
 - [x] create form data as an array of objects
-
 - [x] render form elements for each score row
-
   - [x] begin doBuildScoreRows(), which makes a call to render form elements
   - [x] add event listener on page load that makes a call to doBuildScoreRows() and passes in number of rows
   - [x] build form container and render
@@ -101,9 +92,22 @@ Digital score card for Qwixx game.
 
 ### Slice 2: Events for Score Row
 
-- [x] enable/disable lock button based on checkbox count
-  - [] on click, disable inputs in that row
-- [] disable checkbox numbers based on numbers selected
+- [x] build event listener that listens for changes by score row
+- [x] get checked checkbox count by row
+- [x] handle lock button, disabled on page load
+  - [x] enable lock button when 5+ checkboxes in row have been checked
+  - [x] lock button click events:
+    - [x] disable checkboxes in row
+    - [x] notify user row is locked
+    - [x] render unlock button
+  - [x] on unlock button click:
+    - [x] enable checkboxes in row
+    - [x] remove row lock notification
+    - [x] hide unlock button
+  - [] lock row if last checkbox has been selected
+- [x] handle checkbox checks by row
+  - [x] get min and max checked checkbox index
+  - [x] when user checks a checkbox, all unchecked numbers to its left are disabled
 
 ### Slice 3: Add Total + Track State
 
