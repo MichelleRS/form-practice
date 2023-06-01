@@ -40,12 +40,15 @@ function doListenForScoreRowChanges() {
     let row = formData[index];
     // get checkboxes by class name (ex: rowOneBox)
     let checkboxes = document.getElementsByClassName(`${row.name}Box`);
+    console.log("checkboxes", checkboxes);
     // listen for change to each row
     scoreRows[index].addEventListener("change", () => {
       // initialize a variable to count checks in row
       let count = doCheckedCount(checkboxes);
       // function call to handle lock button
       doHandleLockButton(row, count);
+      // TODO function call to handle disabling checkboxes to left of click
+      doHandleCheckboxClick(checkboxes);
     });
   }
 }
@@ -108,4 +111,41 @@ function doHandleUnlockButton(row, legend, fieldset) {
     // remove unlock button
     unlockButton.hidden = true;
   });
+}
+
+// TODO disable checkboxes to left of selected checkbox
+function doHandleCheckboxClick(checkboxes) {
+  // function calls to set min and max checked checkbox index
+  let minCheckedCheckboxIndex = getMinCheckedCheckboxIndex(checkboxes);
+  let maxCheckedCheckboxIndex = getMaxCheckedCheckboxIndex(checkboxes);
+
+  console.log("minCheckedCheckboxIndex", minCheckedCheckboxIndex);
+  console.log("maxCheckedCheckboxIndex", maxCheckedCheckboxIndex);
+}
+
+// get min checked checkbox index
+function getMinCheckedCheckboxIndex(checkboxes) {
+  let minCheckedCheckboxIndex = null;
+  // loop through checkboxes in row
+  for (let index = 0; index < checkboxes.length; index++) {
+    if (checkboxes[index].checked === true) {
+      // set checked checkbox to index
+      minCheckedCheckboxIndex = index;
+      break;
+    }
+  }
+  return minCheckedCheckboxIndex;
+}
+
+// get max checked checkbox index
+function getMaxCheckedCheckboxIndex(checkboxes) {
+  let maxCheckedCheckboxIndex = null;
+  // loop through checkboxes in row
+  for (let index = 0; index < checkboxes.length; index++) {
+    if (checkboxes[index].checked === true) {
+      // set checked checkbox to index
+      maxCheckedCheckboxIndex = index;
+    }
+  }
+  return maxCheckedCheckboxIndex;
 }
